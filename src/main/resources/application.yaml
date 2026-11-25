@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: budgeting
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+  ai:
+    openai:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai/v1
+      chat:
+        options:
+          model: qwen/qwen3.8-27b
+      audio:
+        transcription:
+          options:
+            model: whisper-large-v3-turbo
+            language: en
+            temperature: 0
+            response-format: text
+#            prompt: |
+#              English audio input.
+#              Audio contains description of financial expanses.
+#              Phrases usually contains:
+#                - US dollars values (numbers + "dollars");
+#                - Action (spent, paid, bought);
+#                - location (marketplace, drugstore, restaurant, store, etc.);
+
+        speech:
+          options:
+            model: canopylabs/orpheus-v1-english
+            voice: diana
+            response-format: wav
+
+
+logging.level.org.springframework.ai: DEBUG
